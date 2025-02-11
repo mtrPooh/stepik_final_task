@@ -3,7 +3,7 @@ from .base_page import BasePage
 from .locators import ProductPageLocators
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import NoAlertPresentException
+from selenium.common.exceptions import TimeoutException
 import math
 
 
@@ -29,7 +29,7 @@ class ProductPage(BasePage):
         assert self.is_element_clickable(*ProductPageLocators.BASKET_BUTTON), "Basket button is not clickable"
         basket_button = self.browser.find_element(*ProductPageLocators.BASKET_BUTTON)
         basket_button.click()
-        self.solve_quiz_and_get_code(), 'Can\'t solve the quiz'
+        self.solve_quiz_and_get_code(), "Can't solve the quiz"
 
     # Проверка наличия названия товара в корзине
     def is_product_name_in_basket_present(self):
@@ -52,20 +52,18 @@ class ProductPage(BasePage):
 
     # Получение проверочного кода
     def solve_quiz_and_get_code(self):
-        WebDriverWait(self.browser, 5).until(EC.alert_is_present())
+        WebDriverWait(self.browser, 10).until(EC.alert_is_present())
         alert = self.browser.switch_to.alert
         x = alert.text.split(" ")[2]
         answer = str(math.log(abs((12 * math.sin(float(x))))))
         alert.send_keys(answer)
         alert.accept()
         try:
-            WebDriverWait(self.browser, 5).until(EC.alert_is_present())
+            WebDriverWait(self.browser, 10).until(EC.alert_is_present())
             alert = self.browser.switch_to.alert
             alert_text = alert.text
             print(f"Your code: {alert_text}")
             alert.accept()
-            return True
-        except NoAlertPresentException:
+        except TimeoutException:
             print("No second alert presented")
-            return False
 

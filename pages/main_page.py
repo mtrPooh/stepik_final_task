@@ -1,17 +1,10 @@
 from selenium.webdriver.common.by import By
 from .base_page import BasePage
-from .login_page import LoginPage
-from .locators import MainPageLocators
 
 
 class MainPage(BasePage):
 
-    # Переход на страницу авторизации
-    def go_to_login_page(self):
-        login_link = self.browser.find_element(*MainPageLocators.LOGIN_LINK)
-        login_link.click()
-
-    # Проверка наличия ссылки авторизации
-    def should_be_login_link(self):
-        assert self.is_element_present(*MainPageLocators.LOGIN_LINK), "Login link is not presented"
+    # Заглушка
+    def __init__(self, *args, **kwargs):
+        super(MainPage, self).__init__(*args, **kwargs)
 

@@ -31,6 +31,16 @@ class ProductPage(BasePage):
         basket_button.click()
         self.solve_quiz_and_get_code(), "Can't solve the quiz"
 
+    # Проверка отсутствия сообщения об успешном добавлении товара в корзину
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.PRODUCT_ADDED_SUCCESS_MESSAGE), \
+            "Product added success message present, but should not be"
+
+    # Проверка исчезновения сообщения об успешном добавлении товара в корзину
+    def should_disappear_of_success_message (self):
+        assert self.is_elemenent_disappeared(*ProductPageLocators.PRODUCT_ADDED_SUCCESS_MESSAGE), \
+            "Product added success message is not disappeared"
+
     # Проверка наличия названия товара в корзине
     def is_product_name_in_basket_present(self):
         assert self.is_element_present(*ProductPageLocators.PRODUCT_NAME_IN_BASKET), "Product name in basket not found"
@@ -52,7 +62,11 @@ class ProductPage(BasePage):
 
     # Получение проверочного кода
     def solve_quiz_and_get_code(self):
-        WebDriverWait(self.browser, 10).until(EC.alert_is_present())
+        try:
+            WebDriverWait(self.browser, 10).until(EC.alert_is_present())
+        except TimeoutException:
+            print("No quiz alert presented, skipped")
+            return
         alert = self.browser.switch_to.alert
         x = alert.text.split(" ")[2]
         answer = str(math.log(abs((12 * math.sin(float(x))))))

@@ -1,9 +1,10 @@
 from selenium.webdriver.common.by import By
 
 
-class MainPageLocators():
+class BasePageLocators():
     # Ссылка авторизации
     LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
+    LOGIN_LINK_INVALID = (By.CSS_SELECTOR, "#login_link_inc")
 
 
 class LoginPageLocators():
@@ -34,5 +35,11 @@ class ProductPageLocators():
     PRODUCT_PRICE_IN_BASKET = (
         By.XPATH,
         "//div[@id='messages']/div[contains(@class, 'alert-info')]/div[contains(@class, 'alertinner')]/p/strong"
+    )
+
+    # Сообщение об успешном добавлении товара в корзину
+    PRODUCT_ADDED_SUCCESS_MESSAGE = (
+        By.XPATH,
+        "//div[@id='messages']/div[contains(@class, 'alert-success')]/div[contains(@class, 'alertinner')]/strong"
     )
 

@@ -12,7 +12,7 @@ class LoginPage(BasePage):
 
     # Проверка корректности URL
     def should_be_login_url(self):
-        assert 'login2' in self.browser.current_url, "Page URL is not login URL"
+        assert 'login' in self.browser.current_url, "Page URL is not login URL"
 
     # Проверка наличия формы авторизации
     def should_be_login_form(self):

@@ -43,3 +43,13 @@ class ProductPageLocators():
         "//div[@id='messages']/div[contains(@class, 'alert-success')]/div[contains(@class, 'alertinner')]/strong"
     )
 
+
+class BasketPageLocators():
+    # Кнопка перехода в корзину
+    BASKET_BUTTON = (By.XPATH, "//div[contains(@class, 'basket-mini')]//a")
+
+    # Товары в корзине
+    BASKET_PRODUCTS = (By.XPATH, "//div[@id='content_inner']//div[@class='row']//p")
+
+    # Сообщение о пустой корзине
+    BASKET_EMPTY_MESSAGE = (By.XPATH, "//div[@id='content_inner']/p")

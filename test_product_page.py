@@ -1,5 +1,4 @@
 from .pages.base_page import BasePage
-from .pages.main_page import MainPage
 from .pages.login_page import LoginPage
 from .pages.product_page import ProductPage
 from .pages.basket_page import BasketPage
@@ -8,7 +7,6 @@ import random
 import pytest
 
 
-@pytest.mark.new
 class TestUserAddToBasketFromProductPage():
     # Setup
     @pytest.fixture(scope="function", autouse=True)

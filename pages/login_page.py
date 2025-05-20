@@ -1,5 +1,7 @@
 from .base_page import BasePage
 from .locators import LoginPageLocators
+from selenium.webdriver.common.by import By
+from selenium.common.exceptions import NoSuchElementException
 
 
 class LoginPage(BasePage):
@@ -22,4 +24,17 @@ class LoginPage(BasePage):
     def should_be_register_form(self):
         assert self.is_element_present(*LoginPageLocators.REGISTER_FORM), "Register form is not presented"
 
-
+    # Регистрация нового пользователя
+    def register_new_user(self, email, password):
+        self.go_to_login_page()
+        try:
+            el = self.browser.find_element(*LoginPageLocators.REGISTER_EMAIL)
+            el.send_keys(email)
+            el = self.browser.find_element(*LoginPageLocators.REGISTER_PASSWORD)
+            el.send_keys(password)
+            el = self.browser.find_element(*LoginPageLocators.REGISTER_PASSWORD_CONFIRM)
+            el.send_keys(password)
+            el = self.browser.find_element(*LoginPageLocators.REGISTER_BUTTON)
+            el.click()
+        except (NoSuchElementException):
+            return False

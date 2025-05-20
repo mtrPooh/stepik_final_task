@@ -4,7 +4,12 @@ from selenium.webdriver.common.by import By
 class BasePageLocators():
     # Ссылка авторизации
     LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
+
+    # Невалидная ссылка авторизации
     LOGIN_LINK_INVALID = (By.CSS_SELECTOR, "#login_link_inc")
+
+    # Иконка авторизованного пользователя
+    USER_ICON = (By.CSS_SELECTOR, ".icon-user")
 
 
 class LoginPageLocators():
@@ -13,6 +18,18 @@ class LoginPageLocators():
 
     # Форма регистрации
     REGISTER_FORM = (By.CSS_SELECTOR, "#register_form")
+
+    # Поле ввода емеил для регистрации
+    REGISTER_EMAIL = (By.CSS_SELECTOR, "#id_registration-email")
+
+    # Поле ввода пароля для регистрации
+    REGISTER_PASSWORD = (By.CSS_SELECTOR, "#id_registration-password1")
+
+    # Поле ввода подтверждения пароля для регистрации
+    REGISTER_PASSWORD_CONFIRM = (By.CSS_SELECTOR, "#id_registration-password2")
+
+    # Кнопка регистрации
+    REGISTER_BUTTON = (By.CSS_SELECTOR, "[name='registration_submit']")
 
 
 class ProductPageLocators():
@@ -53,3 +70,4 @@ class BasketPageLocators():
 
     # Сообщение о пустой корзине
     BASKET_EMPTY_MESSAGE = (By.XPATH, "//div[@id='content_inner']/p")
+
